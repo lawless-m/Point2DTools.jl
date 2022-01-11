@@ -4,7 +4,6 @@ authors = ["Matt Lawless"]
 version = "0.1.0"
 
 [deps]
-SVG = "f377ba27-75b0-41bf-bf2c-536bab790fd1"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 
 [compat]
