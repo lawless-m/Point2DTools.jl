@@ -16,7 +16,7 @@ dtan(p::Point2D) = rad2deg(a)
 
 Return the list of Point2D points which form the convex hull of the supplied points.
 """
-convex(points) = ps[convexperm(points)]
+convex(points) = points[convexperm(points)]
 
 ×(p1::Point2D, p2::Point2D) = p1.x * p2.y - p2.x * p1.y
 
