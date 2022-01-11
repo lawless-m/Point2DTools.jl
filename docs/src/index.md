@@ -5,3 +5,6 @@ Documentation for Point2DTools.jl
 ```@docs
 convex
 ```
+```@docs
+convexperm
+```
