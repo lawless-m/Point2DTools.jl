@@ -2,7 +2,7 @@ module Point2DTools
 
 using StaticArrays
 
-export Point2D, convex, convexperm
+export Point2D, convex, convexperm, centroid
 
 const Point2D = SVector{2}
 
@@ -53,6 +53,14 @@ function convexperm(points)
     end
     vcat(Lupper, Lower[2:end])
 end 
+
+"""
+    centroid(points)
+Calculate the unweighted centre of the closed polygon defined by `points`. 
+# Arguments
+- `points` a Vector of points, assumed to include the "start" and "end" point twice, so points[1] is ignored
+"""
+centroid(points) = sum(points[2:end]) / length(points[2:end])
 
 
 ###

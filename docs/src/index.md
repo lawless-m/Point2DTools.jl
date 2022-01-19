@@ -8,3 +8,6 @@ convex
 ```@docs
 convexperm
 ```
+```@docs
+centroid
+```
