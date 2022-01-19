@@ -60,7 +60,7 @@ Calculate the unweighted centre of the closed polygon defined by `points`.
 # Arguments
 - `points` a Vector of points, assumed to include the "start" and "end" point twice, so points[1] is ignored
 """
-centroid(points) = length(points) < 2 ? points : sum(points[2:end]) / length(points[2:end])
+centroid(points) = length(points) < 2 ? points[1] : sum(points[2:end]) / length(points[2:end])
 
 
 ###
