@@ -2,7 +2,7 @@ module Point2DTools
 
 using StaticArrays
 
-export Point2D, convex, convexperm, centroid, bounds
+export Point2D, convex, convexperm, centroid, bounds, scalefns
 
 const Point2D = SVector{2}
 
@@ -84,20 +84,32 @@ julia> b2 = bounds([Point2D(0,0), Point2D(1,2), Point2D(2,11)])
 function bounds(points)
     minx, miny, maxx, maxy = Inf, Inf, -Inf, -Inf
     for p in points
-        if p.x < minx
-            minx = p.x 
-        elseif p.x > maxx
-            maxx = p.x
+        if p[1] < minx
+            minx = p[1]
+        elseif p[1] > maxx
+            maxx = p[1]
         end
-        if p.y < miny 
-            miny = p.y
+        if p[2] < miny 
+            miny = p[2]
         elseif p.y > maxy
-            maxy = p.y
+            maxy = p[2]
         end
     end
     [Point2D(minx, miny), Point2D(maxx, maxy)]
 end
 
+"""
+    scalefns(points, width, height)
+    scalefns(min_max, width, height)
+return functions to apply to fx and fy of the points or bounds to scale to specified `width` and `height` - preserving aspect
+# Arguments
+- `points` Vector of points with .x and .y properties
+"""
+scalefns(points, width, height) = scalefns(bounds(points)..., width, height)
+function scalefns(minxy, maxxy, width, height)
+    scale = min(width, height) / min(maxxy.x - minxy.x, maxxy.y - minxy.y)
+    x -> scale * (x - minxy.x), y -> scale * (y - minxy.y)
+end
 
 ###
 end
