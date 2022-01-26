@@ -62,6 +62,21 @@ Calculate the unweighted centre of the closed polygon defined by `points`.
 """
 centroid(points) = length(points) < 2 ? points[1] : sum(points[2:end]) / length(points[2:end])
 
-
+function bounds(points)
+    minx, miny, maxx, maxy = Inf, Inf, -Inf, -Inf
+    for p in points
+        if p.x < minx
+            minx = p.x 
+        elseif p.x > maxx
+            maxx = p.x
+        end
+        if p.y < miny 
+            miny = p.y
+        elseif p.y > maxy
+            maxy = p.y
+        end
+    end
+    Point2D(minx, miny), Point2d(maxx, maxy)
+end
 ###
 end
