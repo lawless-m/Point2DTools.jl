@@ -11,3 +11,6 @@ convexperm
 ```@docs
 centroid
 ```
+```@docs
+bounds
+```
