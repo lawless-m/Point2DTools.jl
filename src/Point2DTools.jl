@@ -2,7 +2,7 @@ module Point2DTools
 
 using StaticArrays
 
-export Point2D, convex, convexperm, centroid
+export Point2D, convex, convexperm, centroid, bounds
 
 const Point2D = SVector{2}
 
@@ -62,6 +62,12 @@ Calculate the unweighted centre of the closed polygon defined by `points`.
 """
 centroid(points) = length(points) < 2 ? points[1] : sum(points[2:end]) / length(points[2:end])
 
+"""
+    bounds(points)
+Return the Minimum / Maximum Point2Ds of the given points
+# Arguments
+- `points` Vector of points with .x and .y properties
+"""
 function bounds(points)
     minx, miny, maxx, maxy = Inf, Inf, -Inf, -Inf
     for p in points
@@ -76,7 +82,7 @@ function bounds(points)
             maxy = p.y
         end
     end
-    Point2D(minx, miny), Point2d(maxx, maxy)
+    Point2D(minx, miny), Point2D(maxx, maxy)
 end
 ###
 end
