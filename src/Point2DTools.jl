@@ -64,9 +64,22 @@ centroid(points) = length(points) < 2 ? points[1] : sum(points[2:end]) / length(
 
 """
     bounds(points)
-Return the Minimum / Maximum Point2Ds of the given points
+Return the [Minimum::Point2D, Maximum::Point2D] (so you can vcat with a list of lists)
 # Arguments
 - `points` Vector of points with .x and .y properties
+# Examples
+julia> b1 = bounds([Point2D(-10,0), Point2D(1,2), Point2D(2,1)])
+2-element Vector{StaticArrays.SVector{2, Int64}}:
+ [-10, 0]
+ [2, 2]
+julia> b2 = bounds([Point2D(0,0), Point2D(1,2), Point2D(2,11)])
+2-element Vector{StaticArrays.SVector{2, Int64}}:
+ [0, 0]
+ [2, 11]
+ julia> bounds(vcat(b1, b2))
+ 2-element Vector{StaticArrays.SVector{2, Int64}}:
+  [-10, 0]
+  [2, 11]
 """
 function bounds(points)
     minx, miny, maxx, maxy = Inf, Inf, -Inf, -Inf
@@ -82,7 +95,9 @@ function bounds(points)
             maxy = p.y
         end
     end
-    Point2D(minx, miny), Point2D(maxx, maxy)
+    [Point2D(minx, miny), Point2D(maxx, maxy)]
 end
+
+
 ###
 end
